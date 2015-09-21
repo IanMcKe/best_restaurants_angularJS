@@ -14,12 +14,26 @@
           <h2>Restaurant List</h2>
           <ul>
             <li ng-repeat="item in restaurants">
-              {{item.name}} <br>
-              {{item.address}} <br>
-              {{item.cuisine}} <br>
-              {{item.restaurantDesc}} <br>
-              {{item.rating}} <br>
-              {{item.price}}
+              <span ng-click="editing = true" ng-hide="editing">
+                {{item.name}} (click to edit)<br>
+                Address: {{item.address}} <br>
+                Cuisine: {{item.cuisine}} <br>
+                Description: {{item.restaurantDesc}} <br>
+                Rating: {{item.rating}} <br>
+                Price Range: {{item.price}}
+              </span>
+              <span class="form-group" ng-submit="editing = false" ng-show="editing">
+                <form class="form-inline" role="form">
+                  <input type="text" class="form-control input-sm" ng-model="item.name" placeholder="Name">
+                  <input type="text" class="form-control input-sm" ng-model="item.address" placeholder="Address">
+                  <input type="text" class="form-control input-sm" ng-model="item.restaurantDesc" placeholder="Description">
+                  <input type="text" class="form-control input-sm" ng-model="item.cuisine" placeholder="Cuisine">
+                  <input type="text" class="form-control input-sm" ng-model="item.rating" placeholder="Rating">
+                  <input type="text" class="form-control input-sm" ng-model="item.price" placeholder="Price">
+                  <button type="submit" class="btn btn-info btn-xs">Save</button>
+                  <button type="submit" class="btn btn-danger btn-xs" ng-click="deleteRestaurant(item)">Delete</button>
+                </form>
+              </span>
             </li>
           </ul>
         </div>
@@ -28,22 +42,22 @@
         <h2>New Restaurant</h2>
         <form ng-submit="addRestaurant()" class="form-inline" role="form">
           <div class="form-group">
-            <input type="text" ng-model="restaurantName" class="form-control" placeholder="Name">
+            <input type="text" ng-model="restaurantName" class="form-control" placeholder="Name" required>
           </div>
           <div class="form-group">
-            <input type="text" ng-model="address" class="form-control" placeholder="Address">
+            <input type="text" ng-model="address" class="form-control" placeholder="Address" required>
           </div>
           <div class="form-group">
-            <input type="text" ng-model="restaurantDesc" class="form-control" placeholder="Description">
+            <input type="text" ng-model="restaurantDesc" class="form-control" placeholder="Description" required>
           </div>
           <div class="form-group">
-            <input type="text" ng-model="cuisineName" class="form-control" placeholder="Cuisine">
+            <input type="text" ng-model="cuisineName" class="form-control" placeholder="Cuisine" required>
           </div>
           <div class="form-group">
-            <input type="text" ng-model="rating" class="form-control" placeholder="Rating">
+            <input type="text" ng-model="rating" class="form-control" placeholder="Rating" required>
           </div>
           <div class="form-group">
-            <input type="text" ng-model="price" class="form-control" placeholder="Price">
+            <input type="text" ng-model="price" class="form-control" placeholder="Price" required>
           </div>
           <button type="submit" class="btn btn-default">Submit</button>
         </form>
