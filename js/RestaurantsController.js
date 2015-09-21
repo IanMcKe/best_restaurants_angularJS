@@ -14,4 +14,11 @@ bestRestaurants.controller('RestaurantsCtrl', function RestaurantsCtrl($scope) {
     var index = $scope.restaurants.indexOf(restaurant);
     $scope.restaurants.splice(index, 1);
   };
+
+  $scope.predicate = 'name';
+  $scope.reverse = true;
+  $scope.order = function(predicate) {
+    $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+    $scope.predicate = predicate;
+  };
 });
