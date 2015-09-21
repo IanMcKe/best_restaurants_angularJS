@@ -9,11 +9,22 @@
   </head>
   <body>
     <div class="container" ng-controller="RestaurantsCtrl">
+      <div class="row" ng-show="restaurants.length">
+        <div class="col-md-4">
+          <h4>Search Restaurants</h4>
+          <form class="form-inline" role="form">
+            <div class="form-group">
+              <input ng-model="query" type="text" class="form-control" id="restaurant-name" placeholder="Search">
+            </div>
+          </form>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-12">
-          <h2>Restaurant List</h2>
+          <h2 ng-show="restaurants.length && filtered.length">Restaurant List</h2>
+          <h2 ng-show="restaurants.length && !filtered.length">No Match</h2>
           <ul>
-            <li ng-repeat="item in restaurants">
+            <li ng-repeat="item in filtered = (restaurants | filter:query)">
               <span ng-click="editing = true" ng-hide="editing">
                 {{item.name}} (click to edit)<br>
                 Address: {{item.address}} <br>
@@ -26,8 +37,8 @@
                 <form class="form-inline" role="form">
                   <input type="text" class="form-control input-sm" ng-model="item.name" placeholder="Name">
                   <input type="text" class="form-control input-sm" ng-model="item.address" placeholder="Address">
-                  <input type="text" class="form-control input-sm" ng-model="item.restaurantDesc" placeholder="Description">
                   <input type="text" class="form-control input-sm" ng-model="item.cuisine" placeholder="Cuisine">
+                  <input type="text" class="form-control input-sm" ng-model="item.restaurantDesc" placeholder="Description">
                   <input type="text" class="form-control input-sm" ng-model="item.rating" placeholder="Rating">
                   <input type="text" class="form-control input-sm" ng-model="item.price" placeholder="Price">
                   <button type="submit" class="btn btn-info btn-xs">Save</button>
@@ -48,10 +59,10 @@
             <input type="text" ng-model="address" class="form-control" placeholder="Address" required>
           </div>
           <div class="form-group">
-            <input type="text" ng-model="restaurantDesc" class="form-control" placeholder="Description" required>
+            <input type="text" ng-model="cuisineName" class="form-control" placeholder="Cuisine" required>
           </div>
           <div class="form-group">
-            <input type="text" ng-model="cuisineName" class="form-control" placeholder="Cuisine" required>
+            <input type="text" ng-model="restaurantDesc" class="form-control" placeholder="Description" required>
           </div>
           <div class="form-group">
             <input type="text" ng-model="rating" class="form-control" placeholder="Rating" required>
